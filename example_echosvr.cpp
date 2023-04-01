@@ -65,7 +65,7 @@ static void *readwrite_routine( void *arg )
 {
 
 	co_enable_hook_sys();
-
+        printf("readwrite_routine_routine\n");
 	task_t *co = (task_t*)arg;
 	char buf[ 1024 * 16 ];
 	for(;;)
@@ -111,7 +111,7 @@ static void *accept_routine( void * )
 	fflush(stdout);
 	for(;;)
 	{
-		//printf("pid %ld g_readwrite.size %ld\n",getpid(),g_readwrite.size());
+		printf("pid %ld g_readwrite.size %ld\n",getpid(),g_readwrite.size());
 		if( g_readwrite.empty() )
 		{
 			printf("empty\n"); //sleep
@@ -223,15 +223,15 @@ int main(int argc,char *argv[])
 	for(int k=0;k<proccnt;k++)
 	{
 
-		pid_t pid = fork();
-		if( pid > 0 )
-		{
-			continue;
-		}
-		else if( pid < 0 )
-		{
-			break;
-		}
+	//	pid_t pid = fork();
+	//	if( pid > 0 )
+	//	{
+	//		continue;
+	//	}
+	//	else if( pid < 0 )
+	//	{
+	//		break;
+	//	}
 		for(int i=0;i<cnt;i++)
 		{
 			task_t * task = (task_t*)calloc( 1,sizeof(task_t) );
@@ -249,7 +249,7 @@ int main(int argc,char *argv[])
 
 		exit(0);
 	}
-	if(!deamonize) wait(NULL);
+//	if(!deamonize) wait(NULL);
 	return 0;
 }
 

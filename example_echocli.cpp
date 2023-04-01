@@ -194,7 +194,7 @@ int main(int argc,char *argv[])
 	for(int k=0;k<proccnt;k++)
 	{
 
-		pid_t pid = fork();
+/*		pid_t pid = fork();
 		if( pid > 0 )
 		{
 			continue;
@@ -202,7 +202,7 @@ int main(int argc,char *argv[])
 		else if( pid < 0 )
 		{
 			break;
-		}
+		}*/
 		for(int i=0;i<cnt;i++)
 		{
 			stCoRoutine_t *co = 0;
