@@ -27,8 +27,8 @@ CPP = $(CXX)
 AR = ar -rc
 RANLIB = ranlib
 
-CPPSHARE = $(CPP) -fPIC -shared -O2 -pipe -L$(SRCROOT)/solib/ -o 
-CSHARE = $(CC) -fPIC -shared -O2 -pipe -L$(SRCROOT)/solib/ -o 
+CPPSHARE = $(CPP) -fPIC -shared -g -pipe -L$(SRCROOT)/solib/ -o 
+CSHARE = $(CC) -fPIC -shared -g  -pipe -L$(SRCROOT)/solib/ -o 
 
 ifeq ($v,release)
 CFLAGS= -O2 $(INCLS) -fPIC  -DLINUX -pipe -Wno-deprecated -c
