@@ -123,6 +123,24 @@ int coctx_make(coctx_t* ctx, coctx_pfn_t pfn, const void* s, const void* s1) {
   ctx->regs[kRSI] = (char*)s1;
   return 0;
 }
+#elif defined(__aarch64__)
+
+int coctx_make(coctx_t* ctx, coctx_pfn_t pfn, const void* s, const void* s1) {
+  char* sp = ctx->ss_sp + ctx->ss_size - sizeof(void*);
+  sp = (char*)((unsigned long)sp & -16LL);
+
+  memset(ctx->regs, 0, sizeof(ctx->regs));
+  void** ret_addr = (void**)(sp);
+  *ret_addr = (void*)pfn;
+
+  ctx->regs[31] = sp;//sp
+
+  ctx->regs[30] = (char*)pfn;//lr
+
+  ctx->regs[0] = (char*)s;//para 1
+  ctx->regs[1] = (char*)s1;// para 2
+  return 0;
+}
 
 int coctx_init(coctx_t* ctx) {
   memset(ctx, 0, sizeof(*ctx));
